@@ -1,20 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 }
 
 android {
-    namespace = "com.zinaidasaevska.searchproducts"
+    namespace = "com.zinaidasaevska.domain"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.zinaidasaevska.searchproducts"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,6 +37,22 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    //Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    //Koin
+    implementation(libs.koin.android)
+
+    //Gson
+    implementation(libs.gson)
+
+    //Retrofit
+    implementation(libs.retrofit)
+
+    //OkHttp
+    implementation(libs.okhttp)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
