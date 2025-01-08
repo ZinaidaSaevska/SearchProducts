@@ -15,6 +15,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "BASE_URL", "https://dummyjson.com/products/")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
