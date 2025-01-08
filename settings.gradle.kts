@@ -20,5 +20,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Search Products"
-include(":app")
- 
+include(":presentation")
+include(":data")
+include(":domain")
