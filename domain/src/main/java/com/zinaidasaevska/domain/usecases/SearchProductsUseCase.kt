@@ -1,6 +1,6 @@
 package com.zinaidasaevska.domain.usecases
 
-import com.zinaidasaevska.data.model.Product
+import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.domain.repository.ProductsRepository
 import com.zinaidasaevska.domain.util.Resource
 import kotlinx.coroutines.CancellationException

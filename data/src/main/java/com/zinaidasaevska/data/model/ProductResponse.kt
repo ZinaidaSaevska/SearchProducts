@@ -1,6 +1,6 @@
 package com.zinaidasaevska.data.model
 
-data class Product(
+data class ProductResponse(
     val id: Int,
     val title: String,
     val description: String,

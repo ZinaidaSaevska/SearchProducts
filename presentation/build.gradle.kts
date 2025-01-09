@@ -6,7 +6,9 @@ plugins {
 
 android {
     namespace = "com.zinaidasaevska.searchproducts"
-    compileSdk = 34
+    compileSdk = 35
+
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "com.zinaidasaevska.searchproducts"
@@ -15,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        buildConfigField("String", "BASE_URL", "https://dummyjson.com/products/")
+        buildConfigField("String", "BASE_URL", "\"https://dummyjson.com/products/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,6 +49,7 @@ dependencies {
     //Koin
     implementation(libs.koin.android)
 
+
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
@@ -60,7 +63,19 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
+    //OkHttp
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.logging.interceptor)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.room.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
 }

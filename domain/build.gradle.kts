@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.zinaidasaevska.domain"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -41,21 +41,7 @@ dependencies {
     //Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    //Koin
-    implementation(libs.koin.android)
-
-    //Gson
-    implementation(libs.gson)
-
-    //Retrofit
-    implementation(libs.retrofit)
-
-    //OkHttp
-    implementation(libs.okhttp)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(project(":data"))
 }

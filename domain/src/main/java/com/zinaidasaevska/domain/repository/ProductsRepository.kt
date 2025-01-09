@@ -1,7 +1,7 @@
 package com.zinaidasaevska.domain.repository
 
-import com.zinaidasaevska.data.db.entities.ProductEntity
-import com.zinaidasaevska.data.model.Product
+import com.zinaidasaevska.domain.model.Favourite
+import com.zinaidasaevska.domain.model.Product
 
 interface ProductsRepository {
 
@@ -9,9 +9,9 @@ interface ProductsRepository {
     suspend fun searchProducts(query: String): List<Product>
 
     //DB call
-    suspend fun addProduct(product: ProductEntity)
+    suspend fun addProduct(favourite: Favourite)
 
     suspend fun removeProduct(productId: Int)
 
-    suspend fun loadFavouriteProducts(): List<ProductEntity>
+    suspend fun loadFavouriteProducts(): List<Favourite>
 }
