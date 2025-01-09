@@ -8,6 +8,8 @@ android {
     namespace = "com.zinaidasaevska.searchproducts"
     compileSdk = 34
 
+    android.buildFeatures.buildConfig = true
+
     defaultConfig {
         applicationId = "com.zinaidasaevska.searchproducts"
         minSdk = 24
@@ -60,7 +62,19 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
+    //OkHttp
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.logging.interceptor)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.room.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
 }

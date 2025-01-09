@@ -1,13 +1,13 @@
 package com.zinaidasaevska.domain.usecases
 
-import com.zinaidasaevska.data.db.entities.ProductEntity
+import com.zinaidasaevska.domain.model.Favourite
 import com.zinaidasaevska.domain.repository.ProductsRepository
 
 class AddToFavouritesUseCase(private val repository: ProductsRepository): BaseUseCase<AddToFavouritesUseCase.Params, Unit>() {
 
-    class Params(val productEntity: ProductEntity)
+    class Params(val favourite: Favourite)
 
     override suspend fun run(params: Params) {
-        repository.addProduct(params.productEntity)
+        repository.addProduct(params.favourite)
     }
 }
