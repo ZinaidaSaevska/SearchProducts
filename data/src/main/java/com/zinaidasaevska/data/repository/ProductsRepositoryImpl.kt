@@ -1,7 +1,7 @@
 package com.zinaidasaevska.data.repository
 
 import com.zinaidasaevska.data.api.ProductsApi
-import com.zinaidasaevska.data.db.dao.FavouriteProductsDao
+import com.zinaidasaevska.data.db.ProductsDatabase
 import com.zinaidasaevska.data.util.FavouritesMapper
 import com.zinaidasaevska.data.util.ProductEntityMapper
 import com.zinaidasaevska.data.util.ProductMapper
@@ -11,11 +11,13 @@ import com.zinaidasaevska.domain.repository.ProductsRepository
 
 class ProductsRepositoryImpl(
     private val api: ProductsApi,
-    private val productsDao: FavouriteProductsDao,
+    private val productsDb: ProductsDatabase,
     private val productEntityMapper: ProductEntityMapper,
     private val productMapper: ProductMapper,
     private val favouritesMapper: FavouritesMapper
 ) : ProductsRepository {
+
+    private val productsDao = productsDb.favouritesDao()
 
     override suspend fun searchProducts(query: String): List<Product> {
         val products = api.searchProducts(query).body()?.products?.map { productResponse ->
