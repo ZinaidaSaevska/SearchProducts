@@ -14,9 +14,8 @@ import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.searchproducts.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+private const val SEARCH_TEXT = "search_text"
+
 class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
     private var _binding: FragmentSearchBinding? = null
@@ -29,6 +28,11 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(SEARCH_TEXT, binding.searchInput.editText?.text.toString())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,9 +44,16 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupInputValue(savedInstanceState)
         setupRecyclerView()
         setInputTextListener()
         observeData()
+    }
+
+    private fun setupInputValue(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            binding.searchInput.editText?.setText(savedInstanceState.getString(SEARCH_TEXT))
+        }
     }
 
     private fun setupRecyclerView() {
