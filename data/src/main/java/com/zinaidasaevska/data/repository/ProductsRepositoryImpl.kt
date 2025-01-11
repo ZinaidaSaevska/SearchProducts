@@ -5,7 +5,6 @@ import com.zinaidasaevska.data.db.ProductsDatabase
 import com.zinaidasaevska.data.util.FavouritesMapper
 import com.zinaidasaevska.data.util.ProductEntityMapper
 import com.zinaidasaevska.data.util.ProductMapper
-import com.zinaidasaevska.domain.model.Favourite
 import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.domain.repository.ProductsRepository
 
@@ -26,8 +25,8 @@ class ProductsRepositoryImpl(
         return products ?: emptyList()
     }
 
-    override suspend fun addProduct(favourite: Favourite) {
-        val productEntity = productEntityMapper.mapFrom(favourite)
+    override suspend fun addProduct(product: Product) {
+        val productEntity = productEntityMapper.mapFrom(product)
         productsDao.addProduct(productEntity)
     }
 
@@ -35,7 +34,7 @@ class ProductsRepositoryImpl(
         productsDao.removeProduct(productId)
     }
 
-    override suspend fun loadFavouriteProducts(): List<Favourite> {
+    override suspend fun loadFavouriteProducts(): List<Product> {
         val favourites = productsDao.loadFavouriteProducts().map { productEntity ->
             favouritesMapper.mapFrom(productEntity)
         }

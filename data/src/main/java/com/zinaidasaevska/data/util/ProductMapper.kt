@@ -10,7 +10,8 @@ class ProductMapper: BaseMapper<ProductResponse, Product>() {
             id = from.id,
             title = from.title,
             description = from.description,
-            thumbnail = from.thumbnail
+            thumbnail = from.thumbnail,
+            isFavourite = false
         )
     }
 }
