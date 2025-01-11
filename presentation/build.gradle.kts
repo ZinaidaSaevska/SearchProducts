@@ -38,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -48,7 +51,6 @@ dependencies {
 
     //Koin
     implementation(libs.koin.android)
-
 
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -71,6 +73,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

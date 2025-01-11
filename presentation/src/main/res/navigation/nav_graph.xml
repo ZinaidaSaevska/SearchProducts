@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentSearch">
+
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="com.zinaidasaevska.searchproducts.search.FragmentSearch"
+        android:label="@string/search_label"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentProductDetails"
+            app:destination="@id/fragmentProductDetails" />
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentFavourites"
+            app:destination="@id/fragmentFavourites" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFavourites"
+        android:name="com.zinaidasaevska.searchproducts.FragmentFavourites"
+        android:label="@string/favourites_label"
+        tools:layout="@layout/fragment_favourites"/>
+    <fragment
+        android:id="@+id/fragmentProductDetails"
+        android:name="com.zinaidasaevska.searchproducts.FragmentProductDetails"
+        android:label="@string/details_label"
+        tools:layout="@layout/fragment_product_details" />
+</navigation>
