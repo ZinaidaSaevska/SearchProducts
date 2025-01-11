@@ -1,17 +1,17 @@
 package com.zinaidasaevska.data.util
 
 import com.zinaidasaevska.data.db.entities.ProductEntity
-import com.zinaidasaevska.domain.model.Favourite
+import com.zinaidasaevska.domain.model.Product
 
-class FavouritesMapper: BaseMapper<ProductEntity, Favourite>() {
+class FavouritesMapper: BaseMapper<ProductEntity, Product>() {
 
-    override fun mapFrom(from: ProductEntity): Favourite {
-        return Favourite(
+    override fun mapFrom(from: ProductEntity): Product {
+        return Product(
             id = from.id,
             title = from.title,
             description = from.description,
             thumbnail = from.thumbnail,
-            isFravourite = from.isFravourite
+            isFavourite = from.isFravourite
         )
     }
 }

@@ -7,12 +7,11 @@ import com.zinaidasaevska.domain.usecases.SearchProductsUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    single { AddToFavouritesUseCase(get()) }
+    single { AddToFavouritesUseCase(repository = get()) }
 
-    single { LoadFavouritesUseCase(get()) }
+    single { LoadFavouritesUseCase(repository = get()) }
 
-    single { RemoveFromFavouritesUseCase(get()) }
+    single { RemoveFromFavouritesUseCase(repository = get()) }
 
-    single { SearchProductsUseCase(get()) }
-
+    single { SearchProductsUseCase(repository = get()) }
 }

@@ -19,10 +19,10 @@ private fun buildOkHttpClient(): OkHttpClient {
     return clientBuilder.build()
 }
 
-private fun buildRetrofit(baseUrl: String, httpClent: OkHttpClient): Retrofit {
+private fun buildRetrofit(baseUrl: String, httpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
-        .client(httpClent)
+        .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
