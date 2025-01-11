@@ -5,5 +5,11 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { SearchViewModel(searchProductsUseCase = get()) }
+    viewModel {
+        SearchViewModel(
+            searchProductsUseCase = get(),
+            addToFavouritesUseCase = get(),
+            removeFromFavouritesUseCase = get()
+        )
+    }
 }

@@ -1,7 +1,9 @@
 package com.zinaidasaevska.searchproducts.search
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -10,7 +12,8 @@ import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.searchproducts.R
 import com.zinaidasaevska.searchproducts.databinding.ProductItemBinding
 
-class AdapterSearch(private val listener: IProductFavouriteListener) : ListAdapter<Product, AdapterSearch.ProductViewHolder>(ProductDiffUtils()) {
+class AdapterSearch(private val listener: IProductFavouriteListener) :
+    ListAdapter<Product, AdapterSearch.ProductViewHolder>(ProductDiffUtils()) {
 
     interface IProductFavouriteListener {
         fun addProductToFavourites(product: Product)
@@ -33,16 +36,30 @@ class AdapterSearch(private val listener: IProductFavouriteListener) : ListAdapt
 
     class ProductViewHolder(
         private val binding: ProductItemBinding,
-        private val listener: IProductFavouriteListener) : ViewHolder(binding.root) {
+        private val listener: IProductFavouriteListener
+    ) : ViewHolder(binding.root) {
         fun bind(product: Product) {
-            binding.ivProductImage.load(product.thumbnail) {
-                crossfade(true)
-                placeholder(R.drawable.placeholder_image)
-            }
+            with(binding) {
+                ivProductImage.load(product.thumbnail) {
+                    crossfade(true)
+                    placeholder(R.drawable.placeholder_image)
+                }
 
-            binding.tvItemTitle.text = product.title
-            binding.tvItemDescription.text = product.description
-            binding.ivFavourite.setOnClickListener {
+                tvItemTitle.text = product.title
+                tvItemDescription.text = product.description
+
+                if (product.isFavourite) {
+                    ivFavourite.setColorFilter(Color.RED)
+                } else {
+                    ivFavourite.clearColorFilter()
+                }
+
+                setOnFavouriteIconClickListener(ivFavourite, product)
+            }
+        }
+
+        private fun setOnFavouriteIconClickListener(ivFavourite: ImageView, product: Product) {
+            ivFavourite.setOnClickListener {
                 if (product.isFavourite) {
                     listener.removeProductFromFavourites(product.id)
                 } else {

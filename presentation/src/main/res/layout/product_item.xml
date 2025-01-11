@@ -38,6 +38,7 @@
         android:paddingStart="@dimen/margin_small_16"
         android:paddingEnd="@dimen/margin_small_16"
         android:ellipsize="end"
+        android:maxLines="3"
         app:layout_constraintVertical_weight="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

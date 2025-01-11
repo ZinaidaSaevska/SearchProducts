@@ -84,10 +84,10 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
     }
 
     override fun addProductToFavourites(product: Product) {
-        TODO("Not yet implemented")
+        viewModel.addProductToFavourites(product)
     }
 
     override fun removeProductFromFavourites(productId: Int) {
-        TODO("Not yet implemented")
+        viewModel.removeFromFavourites(productId)
     }
 }
