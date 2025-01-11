@@ -21,6 +21,9 @@ class SearchViewModel(
     private val _products: MutableLiveData<List<Product>> = MutableLiveData()
     val products: LiveData<List<Product>> = _products
 
+    private val _error: MutableLiveData<String> = MutableLiveData()
+    val error: LiveData<String> = _error
+
     fun searchProducts(query: String) {
         viewModelScope.launch {
             when (val response = searchProductsUseCase.run(SearchProductsUseCase.Params(query))) {
@@ -29,8 +32,7 @@ class SearchViewModel(
                 }
 
                 is Resource.Error -> {
-                    //todo show error
-                    Log.d(":)", "${response.error?.message}")
+                    _error.postValue(response.error?.message)
                 }
             }
         }
