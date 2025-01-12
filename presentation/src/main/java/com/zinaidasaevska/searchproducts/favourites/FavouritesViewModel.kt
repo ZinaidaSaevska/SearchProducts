@@ -29,6 +29,12 @@ class FavouritesViewModel(
     fun removeFromFavourites(productId: Int) {
         viewModelScope.launch {
             removeFromFavouritesUseCase.run(RemoveFromFavouritesUseCase.Params(productId))
+            val updatedList = favouritesUiState.value.favouritesList.filter { it.id != productId }
+            _favouritesUiState.update {
+                it.copy(
+                    favouritesList = updatedList
+                )
+            }
         }
     }
 }
