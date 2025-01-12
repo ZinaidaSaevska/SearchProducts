@@ -7,7 +7,9 @@ class AddToFavouritesUseCase(private val repository: ProductsRepository): BaseUs
 
     class Params(val product: Product)
 
-    override suspend fun run(params: Params) {
-        repository.addProduct(params.product)
+    override suspend fun run(params: Params?) {
+        params?.let {
+            repository.addProduct(params.product)
+        }
     }
 }

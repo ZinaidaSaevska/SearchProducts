@@ -18,28 +18,24 @@ private const val SEARCH_TEXT = "search_text"
 
 class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
-    private var _binding: FragmentSearchBinding? = null
+    private var binding: FragmentSearchBinding? = null
 
     private val viewModel: SearchViewModel by viewModel()
 
     private lateinit var searchAdapter: AdapterSearch
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_TEXT, binding.searchInput.editText?.text.toString())
+        outState.putString(SEARCH_TEXT, binding?.searchInput?.editText?.text.toString())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +48,7 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
     private fun setupInputValue(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
-            binding.searchInput.editText?.setText(savedInstanceState.getString(SEARCH_TEXT))
+            binding?.searchInput?.editText?.setText(savedInstanceState.getString(SEARCH_TEXT))
         }
     }
 
@@ -63,7 +59,7 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
             1
         }
 
-        with(binding.rvProducts) {
+        binding?.rvProducts?.apply {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
             searchAdapter = AdapterSearch(this@FragmentSearch)
             adapter = searchAdapter
@@ -71,7 +67,7 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
     }
 
     private fun setInputTextListener() {
-        binding.searchInput.editText?.addTextChangedListener(object : TextWatcher {
+        binding?.searchInput?.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -96,7 +92,7 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 
     override fun addProductToFavourites(product: Product) {

@@ -32,7 +32,9 @@ class SearchViewModel(
                 }
 
                 is Resource.Error -> {
-                    _error.postValue(response.error?.message)
+                    response.errorMessage?.let { message ->
+                        _error.postValue(message)
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization") version "2.0.21"
 }
 
@@ -40,17 +41,29 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
 dependencies {
+    val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
+    //Compose
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.runtime)
+
     //Koin
     implementation(libs.koin.android)
+    runtimeOnly(libs.insert.koin.koin.core)
+    implementation(libs.koin.androidx.compose)
 
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -60,6 +73,10 @@ dependencies {
 
     //Coil
     implementation(libs.coil)
+
+    //Coil Compose
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     //Navigation
     implementation(libs.androidx.navigation.fragment)
