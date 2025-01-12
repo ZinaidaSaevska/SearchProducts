@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
-    id("androidx.navigation.safeargs")
+    alias(libs.plugins.androidx.navigation.safe.args)
 }
 
 android {

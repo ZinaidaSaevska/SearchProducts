@@ -4,12 +4,17 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zinaidasaevska.domain.model.Product
+import com.zinaidasaevska.searchproducts.R
 import com.zinaidasaevska.searchproducts.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,9 +37,30 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupMenuProvider()
         setupRecyclerView()
         setInputTextListener()
         observeData()
+    }
+
+    private fun setupMenuProvider() {
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.favourites -> {
+                        findNavController().navigate(FragmentSearchDirections.actionFragmentSearchToFragmentFavourites())
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner)
     }
 
     private fun setupRecyclerView() {
