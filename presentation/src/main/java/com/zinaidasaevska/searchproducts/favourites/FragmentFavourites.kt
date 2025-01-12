@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.zinaidasaevska.domain.model.Product
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentFavourites : Fragment() {
@@ -23,10 +25,19 @@ class FragmentFavourites : Fragment() {
                 MaterialTheme {
                     FavouritesList(
                         viewModel = viewModel,
-                        onFavouriteIconClick = viewModel::removeFromFavourites
+                        onFavouriteIconClick = viewModel::removeFromFavourites,
+                        onItemClick = ::navigateToProductDetails
                     )
                 }
             }
         }
+    }
+
+    private fun navigateToProductDetails(product: Product) {
+        findNavController().navigate(
+            FragmentFavouritesDirections.actionFragmentFavouritesToFragmentProductDetails(
+                product
+            )
+        )
     }
 }

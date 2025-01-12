@@ -13,14 +13,15 @@
         <action
             android:id="@+id/action_fragmentSearch_to_fragmentProductDetails"
             app:destination="@id/fragmentProductDetails" />
-        <action
-            android:id="@+id/action_fragmentSearch_to_fragmentFavourites"
-            app:destination="@id/fragmentFavourites" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFavourites"
         android:name="com.zinaidasaevska.searchproducts.favourites.FragmentFavourites"
-        android:label="@string/favourites_label"/>
+        android:label="@string/favourites_label">
+        <action
+            android:id="@+id/action_fragmentFavourites_to_fragmentProductDetails"
+            app:destination="@id/fragmentProductDetails" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentProductDetails"
         android:name="com.zinaidasaevska.searchproducts.productdetails.FragmentProductDetails"
