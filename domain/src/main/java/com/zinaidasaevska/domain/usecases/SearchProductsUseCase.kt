@@ -10,14 +10,16 @@ class SearchProductsUseCase(private val repository: ProductsRepository):
 
     class Params(val query: String)
 
-    override suspend fun run(params: Params): Resource<List<Product>> {
-        return try {
-            val response = repository.searchProducts(params.query)
-            Resource.Success(response)
-        } catch (ex: CancellationException) {
-            throw ex
-        } catch (ex: Exception) {
-            Resource.Error(ex)
-        }
+    override suspend fun run(params: Params?): Resource<List<Product>> {
+        return params?.let {
+            try {
+                val response = repository.searchProducts(params.query)
+                Resource.Success(response)
+            } catch (ex: CancellationException) {
+                throw ex
+            } catch (ex: Exception) {
+                Resource.Error(ex.message)
+            }
+        } ?: Resource.Error("Missing params")
     }
 }

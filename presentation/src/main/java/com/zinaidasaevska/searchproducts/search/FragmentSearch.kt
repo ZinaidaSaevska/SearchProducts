@@ -14,56 +14,39 @@ import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.searchproducts.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val SEARCH_TEXT = "search_text"
-
 class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
 
-    private var _binding: FragmentSearchBinding? = null
+    private var binding: FragmentSearchBinding? = null
 
     private val viewModel: SearchViewModel by viewModel()
 
     private lateinit var searchAdapter: AdapterSearch
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_TEXT, binding.searchInput.editText?.text.toString())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupInputValue(savedInstanceState)
         setupRecyclerView()
         setInputTextListener()
         observeData()
     }
 
-    private fun setupInputValue(savedInstanceState: Bundle?) {
-        savedInstanceState?.let {
-            binding.searchInput.editText?.setText(savedInstanceState.getString(SEARCH_TEXT))
-        }
-    }
-
     private fun setupRecyclerView() {
-        val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            3
-        } else {
-            1
-        }
+        val spanCount =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                3
+            } else {
+                1
+            }
 
-        with(binding.rvProducts) {
+        binding?.rvProducts?.apply {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
             searchAdapter = AdapterSearch(this@FragmentSearch)
             adapter = searchAdapter
@@ -71,17 +54,15 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
     }
 
     private fun setInputTextListener() {
-        binding.searchInput.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        binding?.searchInput?.editText?.apply {
+            setOnEditorActionListener { _, _, _ ->
+                text?.let { inputText ->
+                    viewModel.searchProducts(inputText.toString())
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                true
             }
-
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.searchProducts(s.toString())
-            }
-        })
+        }
     }
 
     private fun observeData() {
@@ -92,11 +73,18 @@ class FragmentSearch : Fragment(), AdapterSearch.IProductFavouriteListener {
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
         }
+
+        viewModel.query.observe(viewLifecycleOwner) { query ->
+            binding?.searchInput?.editText?.apply {
+                setText(query)
+                setSelection(query.length)
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 
     override fun addProductToFavourites(product: Product) {

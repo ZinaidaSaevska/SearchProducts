@@ -7,7 +7,9 @@ class RemoveFromFavouritesUseCase(private val repository: ProductsRepository):
 
     class Params(val productId: Int)
 
-    override suspend fun run(params: Params) {
-        repository.removeProduct(params.productId)
+    override suspend fun run(params: Params?) {
+        params?.let {
+            repository.removeProduct(params.productId)
+        }
     }
 }
