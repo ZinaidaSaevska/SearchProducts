@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.zinaidasaevska.domain.model.Product
 import com.zinaidasaevska.searchproducts.R
 import com.zinaidasaevska.searchproducts.databinding.FragmentProductDetailsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentProductDetails : Fragment() {
 
     private var binding: FragmentProductDetailsBinding? = null
     private val args: FragmentProductDetailsArgs by navArgs()
+    private val viewModel: ProductDetailsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +52,22 @@ class FragmentProductDetails : Fragment() {
 
             if (product.isFavourite) {
                 ivFavourite.setColorFilter(Color.RED)
+            }
+
+            setFavouritesOnClickListener(product, ivFavourite)
+        }
+    }
+
+    private fun setFavouritesOnClickListener(product: Product, favouritesIcon: ImageView) {
+        favouritesIcon.setOnClickListener {
+            if (product.isFavourite) {
+                product.isFavourite = false
+                viewModel.removeFromFavourites(product.id)
+                favouritesIcon.clearColorFilter()
+            } else {
+                product.isFavourite = true
+                viewModel.addToFavourites(product)
+                favouritesIcon.setColorFilter(Color.RED)
             }
         }
     }
