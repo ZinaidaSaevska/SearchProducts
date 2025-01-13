@@ -20,10 +20,18 @@
     <fragment
         android:id="@+id/fragmentFavourites"
         android:name="com.zinaidasaevska.searchproducts.favourites.FragmentFavourites"
-        android:label="@string/favourites_label"/>
+        android:label="@string/favourites_label">
+        <action
+            android:id="@+id/action_fragmentFavourites_to_fragmentProductDetails"
+            app:destination="@id/fragmentProductDetails" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentProductDetails"
-        android:name="com.zinaidasaevska.searchproducts.FragmentProductDetails"
+        android:name="com.zinaidasaevska.searchproducts.productdetails.FragmentProductDetails"
         android:label="@string/details_label"
-        tools:layout="@layout/fragment_product_details" />
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="product"
+            app:argType="com.zinaidasaevska.domain.model.Product" />
+    </fragment>
 </navigation>

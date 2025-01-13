@@ -10,7 +10,7 @@ class ProductEntityMapper: BaseMapper<Product, ProductEntity>() {
             title = from.title,
             description = from.description,
             thumbnail = from.thumbnail,
-            isFravourite = from.isFavourite
+            isFavourite = from.isFavourite
         )
     }
 }

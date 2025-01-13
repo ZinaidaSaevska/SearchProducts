@@ -18,6 +18,7 @@ class AdapterSearch(private val listener: IProductFavouriteListener) :
     interface IProductFavouriteListener {
         fun addProductToFavourites(product: Product)
         fun removeProductFromFavourites(productId: Int)
+        fun onItemClick(product: Product)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -55,6 +56,10 @@ class AdapterSearch(private val listener: IProductFavouriteListener) :
                 }
 
                 setOnFavouriteIconClickListener(ivFavourite, product)
+
+                root.setOnClickListener {
+                    listener.onItemClick(product)
+                }
             }
         }
 

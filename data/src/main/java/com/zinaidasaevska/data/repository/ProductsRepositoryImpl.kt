@@ -27,6 +27,7 @@ class ProductsRepositoryImpl(
 
     override suspend fun addProduct(product: Product) {
         val productEntity = productEntityMapper.mapFrom(product)
+        productEntity.isFavourite = true
         productsDao.addProduct(productEntity)
     }
 

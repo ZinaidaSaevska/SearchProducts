@@ -1,6 +1,7 @@
 package com.zinaidasaevska.searchproducts.favourites
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,7 +35,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun FavouritesList(
     viewModel: FavouritesViewModel = koinViewModel(),
-    onFavouriteIconClick: (Int) -> Unit
+    onFavouriteIconClick: (Int) -> Unit,
+    onItemClick: (Product) -> Unit
 ) {
 
     val favouritesUiState = viewModel.favouritesUiState.collectAsState()
@@ -52,7 +54,7 @@ fun FavouritesList(
         contentPadding = PaddingValues(dimensionResource(R.dimen.margin_small_16))
     ) {
         items(favouritesUiState.value.favouritesList) { item: Product ->
-            FavouriteItem(item, onFavouriteIconClick)
+            FavouriteItem(item, onFavouriteIconClick, onItemClick)
         }
     }
 }
@@ -60,13 +62,17 @@ fun FavouritesList(
 @Composable
 fun FavouriteItem(
     product: Product,
-    onFavouriteIconClick: (Int) -> Unit
+    onFavouriteIconClick: (Int) -> Unit,
+    onItemClick: (Product) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(dimensionResource(R.dimen.product_item_card_size))
             .padding(dimensionResource(R.dimen.margin_small_16))
+            .clickable {
+                onItemClick(product)
+            }
     ) {
         Box(
             modifier = Modifier
@@ -120,7 +126,5 @@ fun FavouriteItemPreview() {
         description = stringResource(R.string.lorem_ipsum),
         thumbnail = "https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20iPhone%20Charger/thumbnail.png",
         isFavourite = true
-    ), {
-
-    })
+    ), {}, {})
 }
