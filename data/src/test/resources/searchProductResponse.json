@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": 101,
+      "title": "Apple AirPods Max Silver",
+      "description": "The Apple AirPods Max in Silver are premium over-ear headphones with high-fidelity audio, adaptive EQ, and active noise cancellation. Experience immersive sound in style.",
+      "category": "mobile-accessories",
+      "price": 549.99,
+      "discountPercentage": 11.7,
+      "rating": 3.11,
+      "stock": 7,
+      "tags": [
+        "electronics",
+        "over-ear headphones"
+      ],
+      "brand": "Apple",
+      "sku": "HPK82VDE",
+      "weight": 4,
+      "dimensions": {
+        "width": 7.73,
+        "height": 18.36,
+        "depth": 17.87
+      },
+      "warrantyInformation": "3 months warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 1,
+          "comment": "Waste of money!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Harper Kelly",
+          "reviewerEmail": "harper.kelly@x.dummyjson.com"
+        },
+        {
+          "rating": 3,
+          "comment": "Not as described!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Abigail Rivera",
+          "reviewerEmail": "abigail.rivera@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Excellent quality!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Nora Russell",
+          "reviewerEmail": "nora.russell@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 2,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.624Z",
+        "updatedAt": "2024-05-23T08:56:21.624Z",
+        "barcode": "9261269777547",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20AirPods%20Max%20Silver/1.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20AirPods%20Max%20Silver/thumbnail.png"
+    }
+  ]
+}
