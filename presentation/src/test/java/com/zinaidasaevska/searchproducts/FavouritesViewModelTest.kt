@@ -37,7 +37,7 @@ class FavouritesViewModelTest {
     }
 
     @Test
-    fun `test favourite items are loaded on initialization`() {
+    fun `test load favourite items success`() {
         //Given
         val favouritesList = listOf(
             Product(
@@ -51,7 +51,7 @@ class FavouritesViewModelTest {
         coEvery { loadFavouritesUseCase.run() } returns favouritesList
 
         //When
-        sut = FavouritesViewModel(loadFavouritesUseCase, removeFromFavouritesUseCase)
+        sut.getFavourites()
 
         //Then
         val result = sut.favouritesUiState.value.favouritesList
