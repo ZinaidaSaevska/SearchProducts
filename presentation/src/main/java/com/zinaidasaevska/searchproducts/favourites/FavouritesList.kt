@@ -88,7 +88,9 @@ fun FavouriteItem(
 
             IconButton(
                 onClick = { onFavouriteIconClick(product.id) },
-                modifier = Modifier.align(Alignment.TopEnd),
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(dimensionResource(R.dimen.margin_small_16)),
                 content = {
                     Icon(
                         painterResource(R.drawable.ic_favourite),

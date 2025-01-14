@@ -18,7 +18,7 @@ class FavouritesViewModel(
         MutableStateFlow(FavouritesUiState(favouritesList = emptyList()))
     val favouritesUiState: StateFlow<FavouritesUiState> = _favouritesUiState
 
-    init {
+    fun getFavourites() {
         viewModelScope.launch {
             _favouritesUiState.update {
                 it.copy(favouritesList = loadFavouritesUseCase())

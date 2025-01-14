@@ -60,14 +60,14 @@ class FragmentProductDetails : Fragment() {
 
     private fun setFavouritesOnClickListener(product: Product, favouritesIcon: ImageView) {
         favouritesIcon.setOnClickListener {
+            product.isFavourite = !product.isFavourite
+
             if (product.isFavourite) {
-                product.isFavourite = false
-                viewModel.removeFromFavourites(product.id)
-                favouritesIcon.clearColorFilter()
-            } else {
-                product.isFavourite = true
                 viewModel.addToFavourites(product)
                 favouritesIcon.setColorFilter(Color.RED)
+            } else {
+                viewModel.removeFromFavourites(product.id)
+                favouritesIcon.clearColorFilter()
             }
         }
     }

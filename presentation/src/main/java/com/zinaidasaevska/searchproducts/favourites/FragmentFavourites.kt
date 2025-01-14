@@ -33,6 +33,11 @@ class FragmentFavourites : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getFavourites()
+    }
+
     private fun navigateToProductDetails(product: Product) {
         findNavController().navigate(
             FragmentFavouritesDirections.actionFragmentFavouritesToFragmentProductDetails(
